@@ -9,5 +9,4 @@ module.exports = {
   rules: {
     semi: ['error', 'always'],
   },
-  plugins: ['jsx-a11y', 'prettier'],
 };
