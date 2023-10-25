@@ -19,6 +19,9 @@ const endPoints = {
     getCategoryItems: (id) => `${API}/api/${VERSION}/categories/${id}/products/`,
     updateCategory: (id) => `${API}/api/${VERSION}/categories/${id}/`,
   },
+  files: {
+    addImage: `${API}/api/${VERSION}/files/upload/`,
+  },
 };
 
 export default endPoints;
