@@ -13,6 +13,12 @@ const endPoints = {
     updateProducts: (id) => `${API}/api/${VERSION}/products/${id}`,
     deleteProducts: (id) => `${API}/api/${VERSION}/products/${id}`,
   },
+  categories: {
+    getCategoriesList: `${API}/api/${VERSION}/categories/`,
+    addCategory: `${API}/api/${VERSION}/categories/`,
+    getCategoryItems: (id) => `${API}/api/${VERSION}/categories/${id}/products/`,
+    updateCategory: (id) => `${API}/api/${VERSION}/categories/${id}/`,
+  },
 };
 
 export default endPoints;
