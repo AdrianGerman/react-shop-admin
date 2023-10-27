@@ -1,6 +1,7 @@
 import { useState, Fragment } from 'react';
 import { CheckIcon } from '@heroicons/react/20/solid';
 import Modal from '@common/Modal';
+// import FormProduct from '@components/FormProduct';
 
 export default function products() {
   const [open, setOpen] = useState(false);
