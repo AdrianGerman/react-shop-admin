@@ -3,6 +3,7 @@ import { useRef } from 'react';
 /* eslint-disable jsx-a11y/label-has-associated-control */
 export default function FormProduct() {
   const formRef = useRef(null);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(formRef.current);
@@ -22,26 +23,47 @@ export default function FormProduct() {
           <div className="grid grid-cols-6 gap-6">
             <div className="col-span-6 sm:col-span-3">
               <label htmlFor="title" className="block text-sm font-medium text-gray-700">
-                Title
+                Nombre
               </label>
-              <input type="text" name="title" id="title" className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+              <input
+                type="text"
+                name="title"
+                id="title"
+                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                required
+                minLength="5"
+                maxLength="40"
+              />
             </div>
             <div className="col-span-6 sm:col-span-3">
               <label htmlFor="price" className="block text-sm font-medium text-gray-700">
-                Price
+                Precio
               </label>
-              <input type="number" name="price" id="price" className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+              <input
+                type="number"
+                name="price"
+                id="price"
+                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                required
+                min="0"
+                pattern="^[0-9]+$"
+              />
             </div>
             <div className="col-span-6">
               <label htmlFor="category" className="block text-sm font-medium text-gray-700">
-                Category
+                Categoría
               </label>
               <select
                 id="category"
                 name="category"
                 autoComplete="category-name"
+                defaultValue=""
                 className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                required
               >
+                <option value="" disabled>
+                  --Seleccionar--
+                </option>
                 <option value="1">Clothes</option>
                 <option value="2">Electronics</option>
                 <option value="3">Furniture</option>
@@ -52,19 +74,22 @@ export default function FormProduct() {
 
             <div className="col-span-6">
               <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-                Description
+                Descripción
               </label>
               <textarea
                 name="description"
                 id="description"
                 autoComplete="description"
                 rows="3"
-                className="form-textarea mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                className="form-textarea mt-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 shadow-sm sm:text-sm border-gray-300 rounded-md"
+                required
+                minLength="10"
+                maxLength="150"
               />
             </div>
             <div className="col-span-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700">Cover photo</label>
+                <label className="block text-sm font-medium text-gray-700">Seleccionar imagen</label>
                 <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                   <div className="space-y-1 text-center">
                     <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
@@ -80,12 +105,12 @@ export default function FormProduct() {
                         htmlFor="images"
                         className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                       >
-                        <span>Upload a file</span>
-                        <input id="images" name="images" type="file" className="sr-only" />
+                        <span>Cargar un archivo</span>
+                        <input id="images" name="images" type="file" className="sr-only" required accept="image/png, image/jpeg, image/jpg" />
                       </label>
-                      <p className="pl-1">or drag and drop</p>
+                      <p className="pl-1">o arrastralo aqui</p>
                     </div>
-                    <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                    <p className="text-xs text-gray-500">PNG, JPG, GIF hasta 10MB</p>
                   </div>
                 </div>
               </div>
