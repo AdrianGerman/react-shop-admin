@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { addProduct } from '@services/api/products';
 
 /* eslint-disable jsx-a11y/label-has-associated-control */
 export default function FormProduct() {
@@ -14,7 +15,10 @@ export default function FormProduct() {
       categoryId: parseInt(formData.get('category')),
       images: [formData.get('images').name],
     };
-    console.log(data);
+    // console.log(data);
+    addProduct(data).then((response) => {
+      console.log(response);
+    });
   };
   return (
     <form ref={formRef} onSubmit={handleSubmit}>
