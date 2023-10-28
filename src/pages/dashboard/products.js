@@ -1,11 +1,26 @@
-import { useState, Fragment } from 'react';
+import { useState, useEffect } from 'react';
 import { CheckIcon } from '@heroicons/react/20/solid';
 import Modal from '@common/Modal';
 import FormProduct from '@components/FormProduct';
+import axios from 'axios';
+import endPoints from '@services/api';
 
-export default function products() {
+export default function Products() {
   const [open, setOpen] = useState(false);
   const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    async function getProducts() {
+      const response = await axios.get(endPoints.products.allProducts);
+      setProducts(response.data);
+    }
+    try {
+      getProducts();
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
+
   return (
     <>
       <div className="lg:flex lg:items-center lg:justify-between mb-12">
