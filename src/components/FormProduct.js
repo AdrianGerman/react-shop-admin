@@ -17,7 +17,7 @@ export default function FormProduct({ setOpen, setAlert }) {
     };
     // console.log(data);
     addProduct(data)
-      .then((response) => {
+      .then(() => {
         setAlert({
           active: true,
           message: 'Product added successfully',
