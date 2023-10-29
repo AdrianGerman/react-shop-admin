@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { addProduct } from '@services/api/products';
 
 /* eslint-disable jsx-a11y/label-has-associated-control */
-export default function FormProduct() {
+export default function FormProduct({ setOpen, setAlert }) {
   const formRef = useRef(null);
 
   const handleSubmit = (event) => {
@@ -16,9 +16,24 @@ export default function FormProduct() {
       images: [formData.get('images').name],
     };
     // console.log(data);
-    addProduct(data).then((response) => {
-      console.log(response);
-    });
+    addProduct(data)
+      .then((response) => {
+        setAlert({
+          active: true,
+          message: 'Product added successfully',
+          type: 'success',
+          autoClose: false,
+        });
+        setOpen(false);
+      })
+      .catch((error) => {
+        setAlert({
+          active: true,
+          message: error.message,
+          type: 'error',
+          autoclose: false,
+        });
+      });
   };
   return (
     <form ref={formRef} onSubmit={handleSubmit}>
