@@ -20,7 +20,7 @@ export default function FormProduct({ setOpen, setAlert }) {
       .then(() => {
         setAlert({
           active: true,
-          message: 'Product added successfully',
+          message: 'Producto agregado exitosamente',
           type: 'success',
           autoClose: false,
         });
