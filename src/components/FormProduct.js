@@ -1,9 +1,11 @@
 import { useRef } from 'react';
-import { addProduct } from '@services/api/products';
+import { addProduct, updateProduct } from '@services/api/products';
+import { useRouter } from 'next/router';
 
 /* eslint-disable jsx-a11y/label-has-associated-control */
 export default function FormProduct({ setOpen, setAlert, product }) {
   const formRef = useRef(null);
+  const router = useRouter();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -13,27 +15,32 @@ export default function FormProduct({ setOpen, setAlert, product }) {
       price: parseInt(formData.get('price')),
       description: formData.get('description'),
       categoryId: parseInt(formData.get('category')),
-      images: [formData.get('images').name],
+      images: formData.get('images').name ? [formData.get('images').name] : null,
     };
-    // console.log(data);
-    addProduct(data)
-      .then(() => {
-        setAlert({
-          active: true,
-          message: 'Producto agregado exitosamente',
-          type: 'success',
-          autoClose: false,
-        });
-        setOpen(false);
-      })
-      .catch((error) => {
-        setAlert({
-          active: true,
-          message: error.message,
-          type: 'error',
-          autoclose: false,
-        });
+    if (product) {
+      updateProduct(product.id, data).then(() => {
+        router.push('/dashboard/products');
       });
+    } else {
+      addProduct(data)
+        .then(() => {
+          setAlert({
+            active: true,
+            message: 'Producto agregado exitosamente',
+            type: 'success',
+            autoClose: false,
+          });
+          setOpen(false);
+        })
+        .catch((error) => {
+          setAlert({
+            active: true,
+            message: error.message,
+            type: 'error',
+            autoclose: false,
+          });
+        });
+    }
   };
   return (
     <form ref={formRef} onSubmit={handleSubmit}>
@@ -159,7 +166,9 @@ export default function FormProduct({ setOpen, setAlert, product }) {
         <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
           <button
             type="submit"
-            className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium 
+            rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 
+            focus:ring-indigo-500"
           >
             Save
           </button>
