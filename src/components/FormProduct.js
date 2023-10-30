@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { addProduct } from '@services/api/products';
 
 /* eslint-disable jsx-a11y/label-has-associated-control */
-export default function FormProduct({ setOpen, setAlert }) {
+export default function FormProduct({ setOpen, setAlert, product }) {
   const formRef = useRef(null);
 
   const handleSubmit = (event) => {
@@ -45,6 +45,7 @@ export default function FormProduct({ setOpen, setAlert }) {
                 Nombre
               </label>
               <input
+                defaultValue={product?.title}
                 type="text"
                 name="title"
                 id="title"
@@ -59,6 +60,7 @@ export default function FormProduct({ setOpen, setAlert }) {
                 Precio
               </label>
               <input
+                defaultValue={product?.price}
                 type="number"
                 name="price"
                 id="price"
@@ -73,10 +75,10 @@ export default function FormProduct({ setOpen, setAlert }) {
                 Categoría
               </label>
               <select
+                defaultValue={product?.category}
                 id="category"
                 name="category"
                 autoComplete="category-name"
-                defaultValue=""
                 className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 required
               >
@@ -96,6 +98,7 @@ export default function FormProduct({ setOpen, setAlert }) {
                 Descripción
               </label>
               <textarea
+                defaultValue={product?.description}
                 name="description"
                 id="description"
                 autoComplete="description"
@@ -108,10 +111,18 @@ export default function FormProduct({ setOpen, setAlert }) {
             </div>
             <div className="col-span-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700">Seleccionar imagen</label>
+                <label className="block text-sm font-medium text-gray-700">
+                  Seleccionar imagen
+                </label>
                 <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                   <div className="space-y-1 text-center">
-                    <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                    <svg
+                      className="mx-auto h-12 w-12 text-gray-400"
+                      stroke="currentColor"
+                      fill="none"
+                      viewBox="0 0 48 48"
+                      aria-hidden="true"
+                    >
                       <path
                         d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
                         strokeWidth={2}
@@ -125,7 +136,15 @@ export default function FormProduct({ setOpen, setAlert }) {
                         className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                       >
                         <span>Cargar un archivo</span>
-                        <input id="images" name="images" type="file" className="sr-only" required accept="image/png, image/jpeg, image/jpg" />
+                        <input
+                          defaultValue={product?.images}
+                          id="images"
+                          name="images"
+                          type="file"
+                          className="sr-only"
+                          required
+                          accept="image/png, image/jpeg, image/jpg"
+                        />
                       </label>
                       <p className="pl-1">o arrastralo aqui</p>
                     </div>
