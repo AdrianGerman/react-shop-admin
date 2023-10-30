@@ -75,7 +75,8 @@ export default function FormProduct({ setOpen, setAlert, product }) {
                 Categoría
               </label>
               <select
-                defaultValue={product?.category}
+                // defaultValue={product?.category}
+                value={product?.category?.id.toString()}
                 id="category"
                 name="category"
                 autoComplete="category-name"
